@@ -1,0 +1,28 @@
+[package]
+name = "slag-rust"
+version = "0.1.0"
+edition = "2021"
+repository = "https://github.com/ctcl-bregis/slag-rust"
+license = "MIT"
+publish = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+gethostname = "0.4.3"
+log = "0.4.20"
+poise = "0.6.1"
+sqlite = "0.33.0"
+tokio = { version = "1.36.0", features = ["rt-multi-thread", "macros"] }
+ctrlc = "3.4.2"
+
+# Build for x86-64 with optimizations
+[profile.prod_x86-64]
+inherits = "release"
+opt-level = 3
+debug = 0
+
+[profile.dev_x86-64]
+inherits = "dev"
+opt-level = 0
+debug = 2

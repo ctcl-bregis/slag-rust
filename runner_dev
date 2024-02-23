@@ -1,0 +1,21 @@
+#!/bin/bash
+# SLAG - CTCL 2024
+# File: runner_dev
+# Purpose: Linux/BSD script for running the application in development environments
+# Modified: February 21, 2024
+# Modified: February 21, 2024
+
+find . -name "__pycache__" -exec rm -r "{}" 2> /dev/null \;
+
+function showerror {
+    echo "runner_dev ERROR: Management command \"$1\" failed!"
+    # Don't continue if something fails so the app does not try to run with missing files
+    exit
+}
+
+if [[ $* == *--build* ]]
+then
+    cargo build --profile dev_x86-64
+fi
+
+cargo run --profile dev_x86-64

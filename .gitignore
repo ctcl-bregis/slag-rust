@@ -12,3 +12,17 @@ Cargo.lock
 
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
+
+# Production token
+token.txt
+
+# Logs
+logs/
+
+# User data
+birthdays.json
+*.db
+data/
+
+# Editor stuff that does not matter
+.vscode

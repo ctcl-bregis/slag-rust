@@ -1,0 +1,9 @@
+[build]
+rustflags = ["-C", "target-cpu=westmere"]
+
+[term]
+quiet = false
+verbose = false
+hyperlinks = true      # whether cargo inserts links into output
+progress.when = 'auto' # whether cargo shows progress bar
+progress.width = 80    # width of progress bar
