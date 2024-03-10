@@ -2,22 +2,22 @@
 // File: src/main.rs
 // Purpose: Main app code
 // Modified: February 21, 2024
-// Modified: February 22, 2024
+// Modified: March 7, 2024
 
 use poise::serenity_prelude as serenity;
 use log::{info, warn};
 use sqlite;
 use gethostname::gethostname;
 
-use users::users;
+mod users;
+//use crate::users;
 
-struct Data {} // User data, which is stored and accessible in all command invocations
-type Error = Box<dyn std::error::Error + Send + Sync>;
-type Context<'a> = poise::Context<'a, Data, Error>;
+use slag::Data;
+use slag::Error;
+use slag::Context;
 
-/// Displays your or another user's account creation date
-#[poise::command(slash_command, prefix_command)]
-async fn age(ctx: Context<'_>, #[description = "Selected user"] user: Option<serenity::User>,) -> Result<(), Error> {
+#[poise::command(slash_command)]
+pub async fn placeholder(ctx: Context<'_>, #[description = "Selected user"] user: Option<serenity::User>,) -> Result<(), Error> {
     let u = user.as_ref().unwrap_or_else(|| ctx.author());
     let response = format!("{}'s account was created at {}", u.name, u.created_at());
     ctx.say(response).await?;
@@ -30,9 +30,12 @@ async fn main() {
     // Going to need all of them
     let intents = serenity::GatewayIntents::privileged();
 
+    let allcmds = vec![users::info()];
+    //let allcmds = vec![crate::users::age()];
+    
     let framework = poise::Framework::builder()
         .options(poise::FrameworkOptions {
-            commands: vec![age()],
+            commands: allcmds,
             ..Default::default()
         })
         .setup(|ctx, _ready, framework| {
@@ -43,10 +46,10 @@ async fn main() {
         })
         .build();
 
-    // This is here to know what system the bot is running on. Example status: "slag-rust on CTCL-WBPC1"
-    let actname = String::from("slag-rust on ") + &gethostname().into_string().unwrap();
+    // This is here to know what system the bot is running on. Example status: "Watching from CTCL-WBPC1"
+    let actname = String::from("from ") + &gethostname().into_string().unwrap();
 
-    let client = serenity::ClientBuilder::new(token, intents).activity(serenity::ActivityData {name: actname, kind: serenity::ActivityType::Playing, state: None, url: None })
+    let client = serenity::ClientBuilder::new(token, intents).activity(serenity::ActivityData {name: actname, kind: serenity::ActivityType::Watching, state: None, url: None })
         .framework(framework)
         .await;
 

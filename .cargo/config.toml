@@ -1,5 +1,5 @@
 [build]
-rustflags = ["-C", "target-cpu=westmere"]
+rustflags = ["-C", "target-cpu=sandybridge"]
 
 [term]
 quiet = false
