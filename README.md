@@ -15,6 +15,10 @@ TBD
 ### Hardware
 As specified in .cargo/config.toml, the target CPU is "sandybridge". This is to ensure support for the [hardware that I use for hosting SLAG](https://ctcl-tech.com/projects/srv_amp/). 
 
+The module under src/base/mod.rs has functionality specific to x86-64/x86 platforms, currently this is displaying the CPU vendor and model with the /botinfo command. This functionality is not present when compiling for different architectures.
+
+
+
 ### Dependencies
 TBD
 
