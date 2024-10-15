@@ -17,10 +17,15 @@ log = "0.4.20"
 once_cell = "1.19.0"
 phf = { version = "0.11.2", features = ["macros"] }
 poise = { version = "0.6.1", features = ["cache"] }
+proc-macro2 = "1.0"
+quote = "1.0"
 raw-cpuid = "11.0.1"
 regex = "1.10.3"
-scraper = "0.19.0"
+reqwest = "0.12.1"
+serde = "1.0.197"
+serde_json = "1.0.127"
 sqlite = "0.33.0"
+syn = "2.0"
 tokio = { version = "1.36.0", features = ["rt-multi-thread", "macros"] }
 
 # Build for x86-64 with optimizations

@@ -1,0 +1,4 @@
+{
+    "tokenpath": "token.txt"
+    "dburl": "http://192.168.0.235:5984"
+}

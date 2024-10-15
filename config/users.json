@@ -1,0 +1,65 @@
+{ 
+    "months": {
+        "jan": {
+            "name": "January",
+            "num": 1,
+            "days": 31
+        },
+        "feb": {
+            "name": "February",
+            "num": 2,
+            "days": 29
+        },
+        "mar": {
+            "name": "March",
+            "num": 3,
+            "days": 31
+        },
+        "apr": {
+            "name": "April",
+            "num": 4,
+            "days": 30
+        },
+        "may": {
+            "name": "May",
+            "num": 5,
+            "days": 31
+        },
+        "jun": {
+            "name": "June",
+            "num": 6,
+            "days": 30
+        },
+        "jul": {
+            "name": "July",
+            "num": 7,
+            "days": 31
+        },
+        "aug": {
+            "name": "August",
+            "num": 8,
+            "days": 31
+        },
+        "sep": {
+            "name": "September",
+            "num": 9,
+            "days": 30
+        },
+        "oct": {
+            "name": "October",
+            "num": 10,
+            "days": 31
+        },
+        "nov": {
+            "name": "November",
+            "num": 11,
+            "days": 30
+        },
+        "dec": {
+            "name": "December",
+            "num": 12,
+            "days": 31
+        }
+    },
+    "dateformat": "%B %d, %Y %I:%M %p"
+}

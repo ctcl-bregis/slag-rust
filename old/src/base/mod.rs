@@ -2,7 +2,7 @@
 // File: src/base/mod.rs
 // Purpose: Base commands
 // Modified: March 14, 2024
-// Modified: March 17, 2024
+// Modified: August 27, 2024
 
 use std::env;
 
@@ -21,7 +21,7 @@ use crate::Context;
 pub async fn sysinfo(ctx: Context<'_>) -> Result<(), Error> {
     let mut embed = CreateEmbed::new()
         .title("Host System Information")
-        .colour(Colour::from_rgb(127, 127, 127));
+        .colour(Colour::from(10066329));
 
     if gethostname().to_str().is_some() {
         embed = embed.field("System Host Name", gethostname().to_str().unwrap(), false);
@@ -42,7 +42,7 @@ pub async fn sysinfo(ctx: Context<'_>) -> Result<(), Error> {
         Err(_) => embed
     };
 
-    // uname -a should be available on Linux, Android, FreeBSD, OpenBSD, NetBSD, DragonFly BSD and Mac
+    // uname -a should be available on Linux, Android, FreeBSD, OpenBSD, NetBSD, DragonFly BSD and MacOS
     if cfg!(any(target_os = "linux", target_os = "android", target_os = "freebsd", target_os = "openbsd", target_os = "netbsd", target_os = "dragonfly", target_os = "macos")) {
         let unamea: String = String::from_utf8(Command::new("uname").args(["-a"]).output().expect("failed to execute process").stdout).unwrap();
         embed = embed.field("uname -a", unamea, false);
@@ -56,7 +56,7 @@ pub async fn sysinfo(ctx: Context<'_>) -> Result<(), Error> {
         let cpuvendor = cpuid.get_vendor_info().map(|vi| match vi.as_str() {
                 "AuthenticAMD" => "AMD",
                 "GenuineIntel" => "Intel",
-                // Congrats to anyone who manages to run this app on the following CPUs...
+                // Congrats to anyone who manages to run this bot on the following CPUs...
                 "AMDisbetter!" => "AMD",
                 "VIA VIA VIA " => "VIA",
                 "GenuineTMx86" => "Transmeta",
@@ -95,7 +95,7 @@ pub async fn sysinfo(ctx: Context<'_>) -> Result<(), Error> {
 pub async fn botinfo(ctx: Context<'_>) -> Result<(), Error> {
     let mut embed = CreateEmbed::new()
         .title("Bot Information")
-        .colour(Colour::from_rgb(127, 127, 127));
+        .colour(Colour::from(10066329));
 
 
 

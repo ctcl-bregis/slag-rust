@@ -2,39 +2,34 @@
 // File: src/users/mod.rs
 // Purpose: Users commands
 // Modified: February 22, 2024
-// Modified: March 15, 2024
+// Modified: August 28, 2024
+
+use std::collections::HashMap;
 
 use poise::serenity_prelude::{Colour, Embed, EmbedAuthor, EmbedField, EventHandler, Http, Message, Presence};
 use poise::serenity_prelude::builder::CreateEmbed;
 use poise::serenity_prelude::{User, Member};
 use log::error;
 use phf::phf_map;
+use serde::Deserialize;
 
 use crate::Data;
 use crate::Error;
 use crate::Context;
 
-const DATE_FORMAT: &str = "%B %d, %Y %I:%M %p";
-
-pub struct Month {
-    num: u8,
-    days: u8
+#[derive(Deserialize)]
+struct Month {
+    name: String,
+    num: i8,
+    days: i8,
 }
 
-const MONTHS: phf::Map<&'static str, Month> = phf_map! {
-    "january" => Month {num: 1, days: 31},
-    "february" => Month {num: 2, days: 29},
-    "march" => Month {num: 3, days: 31},
-    "april" => Month {num: 4, days: 30},
-    "may" => Month {num: 5, days: 31},
-    "june" => Month {num: 6, days: 30},
-    "july" => Month {num: 7, days: 31},
-    "august" => Month {num: 8, days: 31},
-    "september" => Month {num: 9, days: 30},
-    "october" => Month {num: 10, days: 31},
-    "november" => Month {num: 11, days: 30},
-    "december" => Month {num: 12, days: 31}
-};
+#[derive(Deserialize)]
+struct UsersConfig {
+    months: HashMap<String, Month>,
+    dateformat: String
+}
+
 
 #[poise::command(slash_command)]
 pub async fn info(ctx: Context<'_>, #[description = "User"] selecteduser: Option<User>) -> Result<(), Error> {
@@ -59,8 +54,8 @@ pub async fn info(ctx: Context<'_>, #[description = "User"] selecteduser: Option
         user = selecteduser.unwrap(); 
     }
 
-    // Default to #7F7F7F
-    let mut embed_color: Colour = Colour::from_rgb(127, 127, 127);
+    // Default to #999999
+    let mut embed_color: Colour = Colour::from_rgb(153, 153, 153);
     if let Some(accent_colour) = user.accent_colour {
         embed_color = accent_colour;
     }
